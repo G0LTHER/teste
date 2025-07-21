@@ -1,0 +1,681 @@
+/* Font Import */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* Variables for easier color management and consistency (Light Theme) */
+:root {
+    --color-primary-green: #4CAF50; /* A fresh, appealing green */
+    --color-primary-green-rgb: 76, 175, 80; /* RGB values for primary green */
+    --color-dark-green: #388E3C; /* Darker shade for contrast */
+    --color-light-green: #E8F5E9; /* Very light green for backgrounds */
+    --color-accent-green: #A5D6A7; /* A middle-ground green */
+    --color-text-dark: #263238; /* Dark charcoal for main text */
+    --color-text-medium: #546E7A; /* Muted grey for secondary text */
+    --color-background-light: #F9FBE7; /* Very light, slightly warm background */
+    --color-white: #FFFFFF;
+    --color-black: #212121; /* Deep black for logos/strong elements */
+
+    --shadow-light: 0 2px 10px rgba(0, 0, 0, 0.05); /* Lighter, subtle shadow */
+    --shadow-medium: 0 5px 20px rgba(0, 0, 0, 0.1);
+    --shadow-strong: 0 10px 30px rgba(0, 0, 0, 0.15);
+
+    --border-radius-sm: 6px;
+    --border-radius-md: 12px;
+    --border-radius-lg: 24px;
+
+    --transition-speed: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother animation curve */
+
+    /* Theme transition for smooth changes */
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+/* Dark Theme Variables */
+body.dark-theme {
+    --color-primary-green: #66BB6A; /* Slightly brighter green for dark contrast */
+    --color-primary-green-rgb: 102, 187, 106; /* RGB values for primary green in dark theme */
+    --color-dark-green: #4CAF50;
+    --color-light-green: #3A4750; /* Darker background for light elements, muted blue-grey */
+    --color-accent-green: #5A875C;
+    --color-text-dark: #ECEFF1; /* Light text for dark background */
+    --color-text-medium: #CFD8DC; /* Lighter muted grey */
+    --color-background-light: #212121; /* Dark background: almost black */
+    --color-white: #2C2C2C; /* Darker "white" for card backgrounds, etc. */
+    --color-black: #B0BEC5; /* Lighter "black" for logo/strong elements */
+
+    --shadow-light: 0 2px 10px rgba(255, 255, 255, 0.05);
+    --shadow-medium: 0 5px 20px rgba(0, 0, 0, 0.3); /* Darker shadows in dark mode */
+    --shadow-strong: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--color-background-light);
+    color: var(--color-text-dark);
+    line-height: 1.7; /* Improved readability */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased; /* Smoother fonts on WebKit */
+    -moz-osx-font-smoothing: grayscale; /* Smoother fonts on Firefox */
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 60px; /* Increased padding */
+    background-color: var(--color-white);
+    box-shadow: var(--shadow-light);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 2px solid var(--color-accent-green); /* Thinner, softer border */
+    transition: background-color var(--transition-speed), box-shadow var(--transition-speed), border-color var(--transition-speed);
+}
+
+.logo {
+    font-size: 2.2rem; /* Larger and more prominent */
+    font-weight: 800;
+    color: var(--color-black);
+    text-decoration: none;
+    transition: color var(--transition-speed), transform var(--transition-speed);
+}
+
+.logo span {
+    color: var(--color-primary-green);
+}
+
+.logo:hover {
+    transform: translateY(-2px) scale(1.02); /* Subtle lift and scale */
+    color: var(--color-primary-green);
+}
+
+/* Navigation (Desktop) */
+.nav {
+    display: flex; /* Always flex on desktop */
+    gap: 25px; /* More space between buttons */
+    align-items: center; /* Vertically align items in nav */
+}
+
+.nav button {
+    background-color: transparent; /* No background by default */
+    color: var(--color-text-dark);
+    border: 1px solid transparent; /* Subtle border for hover effect */
+    padding: 10px 20px;
+    border-radius: var(--border-radius-lg);
+    transition: var(--transition-speed);
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.2px;
+}
+
+.nav button:hover {
+    background-color: var(--color-light-green); /* Light green background on hover */
+    color: var(--color-dark-green);
+    border-color: var(--color-accent-green); /* Add a border */
+    transform: translateY(-3px) scale(1.02); /* More noticeable lift and scale */
+    box-shadow: var(--shadow-light);
+}
+
+/* Header Mobile Controls (Container for hamburger and header-level theme toggle) */
+.header-mobile-controls {
+    display: none; /* Hidden on desktop by default */
+    align-items: center;
+    gap: 15px;
+}
+
+/* Hamburger Menu Icon */
+.menu-toggle {
+    display: none; /* Hidden on desktop, shown on mobile */
+    font-size: 2.8rem;
+    cursor: pointer;
+    color: var(--color-primary-green);
+}
+
+/* Theme Toggle Button (Header - visible only on mobile, integrated into nav on desktop) */
+.theme-toggle-button-header {
+    display: none; /* Hidden on desktop. It will be moved to the mobile header-mobile-controls area */
+    background-color: transparent;
+    border: none;
+    color: var(--color-text-dark);
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background-color var(--transition-speed), color var(--transition-speed), transform var(--transition-speed);
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+}
+
+.theme-toggle-button-header:hover {
+    background-color: var(--color-light-green);
+    transform: scale(1.1);
+}
+
+body.dark-theme .theme-toggle-button-header {
+    color: var(--color-text-dark);
+}
+
+body.dark-theme .theme-toggle-button-header:hover {
+    background-color: var(--color-dark-green);
+}
+
+/* Theme Toggle Button within Navigation (visible on desktop, also in mobile menu) */
+.theme-toggle-container-nav {
+    display: flex; /* Always display on desktop as part of the nav */
+    align-items: center;
+    margin-left: 25px; /* Space from previous nav button */
+}
+
+.theme-toggle-button-in-nav {
+    /* Base styles are similar to .nav button, but specific for theme toggle */
+    background-color: transparent;
+    color: var(--color-text-dark);
+    border: 1px solid transparent;
+    padding: 10px 20px;
+    border-radius: var(--border-radius-lg);
+    transition: var(--transition-speed);
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.2px;
+    display: flex; /* To align icon and text */
+    align-items: center;
+    gap: 8px; /* Space between icon and text */
+    white-space: nowrap; /* Prevent text from wrapping */
+}
+
+.theme-toggle-button-in-nav:hover {
+    background-color: var(--color-light-green);
+    color: var(--color-dark-green);
+    border-color: var(--color-accent-green);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: var(--shadow-light);
+}
+
+/* Ensure icons are correctly colored in dark mode for nav button */
+body.dark-theme .theme-toggle-button-in-nav {
+    color: var(--color-text-dark);
+}
+
+body.dark-theme .theme-toggle-button-in-nav:hover {
+    background-color: var(--color-dark-green);
+}
+
+
+/* "Sobre Nós" Section (about-page-content) */
+.about-page-content {
+    display: flex;
+    flex-direction: column; /* Default to column for consistency and responsiveness */
+    max-width: 1200px; /* Wider container */
+    margin: 80px auto 60px auto;
+    padding: 40px 60px;
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-light);
+    transition: background-color var(--transition-speed), box-shadow var(--transition-speed), color var(--transition-speed);
+}
+
+.about-us-main-text {
+    flex: 1; /* Allow to grow */
+    margin-bottom: 60px; /* Space between about text and team cards */
+    color: var(--color-text-medium);
+}
+
+.about-us-main-text h2,
+.integrantes-column h2 {
+    color: var(--color-dark-green);
+    font-size: 2.8rem;
+    margin-bottom: 2rem;
+    font-weight: 700;
+    text-align: center;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.about-us-main-text h2::after,
+.integrantes-column h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 90px;
+    height: 4px;
+    background-color: var(--color-primary-green);
+    border-radius: 2px;
+}
+
+.about-us-main-text p {
+    font-size: 1.15rem;
+    margin-bottom: 1.8rem;
+    text-align: justify;
+    line-height: 1.8;
+    color: var(--color-text-medium);
+}
+
+/* Integrantes Column and Alunos Container */
+.integrantes-column {
+    flex: 1; /* Allow to grow */
+    background: linear-gradient(135deg, var(--color-background-light), var(--color-light-green)); /* Soft gradient background */
+    padding: 40px 30px;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-medium);
+    transition: background var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+
+.alunos-container {
+    display: flex;
+    flex-wrap: nowrap; /* Forces items into a single line */
+    justify-content: center; /* Center horizontally */
+    gap: 2rem; /* Adjusted gap for horizontal layout */
+    padding: 20px 0; /* Padding inside the container, not around the entire section */
+    overflow-x: auto; /* Enable horizontal scrolling if needed */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    scroll-snap-type: x mandatory; /* Snap to cards */
+}
+
+.aluno-card {
+    flex-shrink: 0; /* Prevent cards from shrinking below their content size */
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-medium);
+    padding: 2rem; /* Adjusted padding */
+    text-align: center;
+    width: 200px; /* Base width for cards */
+    min-width: 160px; /* Minimum width to prevent cards from becoming too small */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    transition: var(--transition-speed);
+    position: relative;
+    overflow: hidden;
+    scroll-snap-align: center; /* Snap cards to center when scrolling */
+}
+
+.aluno-card::before { /* Subtle background hover effect */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-light-green);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.3s ease-out;
+    z-index: 0;
+}
+
+.aluno-card:hover::before {
+    transform: scaleY(1);
+}
+
+.aluno-card > * { /* Ensure content stays above the pseudo-element */
+    position: relative;
+    z-index: 1;
+}
+
+.aluno-card img {
+    max-width: 100px; /* Example size for student image */
+    height: auto;
+    border-radius: 50%; /* Make it round */
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow-light); /* Add a subtle shadow to the image */
+    transition: transform 0.3s ease;
+}
+
+.aluno-card:hover img {
+    transform: scale(1.05); /* Slightly enlarge image on card hover */
+}
+
+
+.aluno-name {
+    font-weight: 600;
+    color: var(--color-dark-green);
+    font-size: 1.1rem; /* Adjusted font size */
+    margin-bottom: 1rem; /* More space below name */
+    line-height: 1.4;
+}
+
+.instagram-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem; /* More space above icon */
+    width: 50px; /* Adjusted clickable area */
+    height: 50px;
+    border-radius: 50%; /* Circular background for icon */
+    background-color: var(--color-primary-green); /* Green background */
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: var(--shadow-light);
+}
+
+.instagram-link svg {
+    width: 30px; /* Adjusted SVG size */
+    height: 30px;
+    fill: var(--color-white); /* White fill for icon */
+    transition: fill 0.3s ease, transform 0.3s ease;
+}
+
+.aluno-card:hover {
+    transform: translateY(-10px); /* Slightly less lift */
+    box-shadow: var(--shadow-strong);
+}
+
+.aluno-card:hover .instagram-link {
+    background-color: var(--color-dark-green); /* Darker green background on hover */
+    box-shadow: var(--shadow-medium);
+}
+
+.aluno-card:hover .instagram-link svg {
+    transform: scale(1.1); /* Icon scales slightly on hover */
+}
+
+/* Dark Theme Specific Styles for Alunos page */
+body.dark-theme .about-page-content {
+    background-color: var(--color-white); /* Darker "white" for content card */
+    box-shadow: var(--shadow-medium); /* Adjust shadow for dark theme */
+}
+
+body.dark-theme .about-us-main-text h2,
+body.dark-theme .integrantes-column h2 {
+    color: var(--color-primary-green); /* Use a bright green for headings */
+}
+
+body.dark-theme .about-us-main-text p {
+    color: var(--color-text-medium); /* Lighter grey for paragraphs */
+}
+
+body.dark-theme .integrantes-column {
+    background: linear-gradient(135deg, #2C2C2C, #3A4750); /* Darker gradient */
+    box-shadow: var(--shadow-strong);
+}
+
+body.dark-theme .aluno-card {
+    background-color: var(--color-white); /* Card background in dark theme */
+    box-shadow: var(--shadow-medium);
+}
+
+body.dark-theme .aluno-card::before {
+    background-color: #455A64; /* Darker hover background for cards */
+}
+
+body.dark-theme .aluno-card:hover {
+    box-shadow: var(--shadow-strong);
+}
+
+body.dark-theme .aluno-name {
+    color: var(--color-text-dark); /* Light text for names */
+}
+
+body.dark-theme .instagram-link {
+    background-color: var(--color-dark-green); /* Adjust link background for dark theme */
+}
+
+body.dark-theme .instagram-link svg {
+    fill: var(--color-white); /* Keep SVG white */
+}
+
+body.dark-theme .instagram-link:hover {
+    background-color: var(--color-primary-green); /* Brighter green on hover */
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 992px) { /* Tablet breakpoint applies general adjustments */
+    .header {
+        padding: 15px 30px;
+    }
+
+    /* Main navigation should be hidden by default on tablet/mobile */
+    .nav {
+        display: none; /* Hidden on tablet initially, becomes flex when active */
+        flex-direction: column; /* Stack buttons vertically */
+        position: fixed;
+        top: 0;
+        right: -300px; /* Off-screen */
+        width: 300px;
+        height: 100%;
+        background-color: var(--color-white);
+        padding: 80px 30px 20px 30px;
+        box-shadow: var(--shadow-strong);
+        z-index: 1001;
+        transition: right var(--transition-speed), background-color var(--transition-speed), box-shadow var(--transition-speed);
+        overflow-y: auto;
+    }
+
+    /* State when the menu is active (open) */
+    .nav.active {
+        right: 0; /* Slide into view */
+        display: flex; /* Make it visible */
+    }
+
+    .nav button {
+        width: 100%;
+        margin-bottom: 15px;
+        text-align: left;
+        padding: 12px 20px;
+        font-size: 1.05rem;
+        box-shadow: none;
+    }
+    .nav button:hover {
+        transform: translateY(0);
+        box-shadow: none;
+        background-color: var(--color-accent-green);
+    }
+
+    /* Header Mobile Controls (Visible on tablet/mobile) */
+    .header-mobile-controls {
+        display: flex; /* Show hamburger and header theme toggle */
+        margin-left: auto; /* Push to right */
+    }
+
+    /* Hamburger menu icon itself (Visible on tablet/mobile) */
+    .menu-toggle {
+        display: block;
+        font-size: 2.5rem;
+    }
+
+    /* Header-level Theme Toggle Button (Visible on tablet/mobile) */
+    .theme-toggle-button-header {
+        display: flex; /* Show in header-mobile-controls on mobile */
+        font-size: 1.6rem;
+        width: 45px;
+        height: 45px;
+    }
+
+    /* Theme toggle container within Navigation (Visible in mobile nav only) */
+    .theme-toggle-container-nav {
+        display: flex; /* Show in mobile nav */
+        width: 100%;
+        margin-top: 15px;
+        border-top: 1px solid var(--color-accent-green);
+        padding-top: 15px;
+    }
+    .theme-toggle-button-in-nav {
+        justify-content: center; /* Center icon/text */
+        font-size: 1rem;
+        padding: 10px 20px;
+        background-color: var(--color-light-green); /* Has background in mobile menu */
+        border-color: var(--color-accent-green);
+    }
+    .theme-toggle-button-in-nav span {
+        display: inline-block; /* Ensure text is visible in mobile menu */
+    }
+
+
+    /* Overlay behind the side menu */
+    body.nav-active::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        transition: opacity var(--transition-speed);
+    }
+
+
+    /* General adjustments for tablet/mobile layouts */
+    .about-page-content {
+        margin: 60px auto 40px auto;
+        padding: 30px 40px;
+    }
+
+    .about-us-main-text h2, .integrantes-column h2 {
+        font-size: 2.2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .about-us-main-text p {
+        font-size: 1.05rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .integrantes-column {
+        padding: 30px 20px;
+    }
+
+    .alunos-container {
+        padding: 20px 0;
+        gap: 1.5rem;
+    }
+
+    .aluno-card {
+        width: 170px;
+        min-width: 150px;
+        padding: 1.5rem;
+    }
+
+    .aluno-name {
+        font-size: 1.05rem;
+    }
+}
+
+
+@media (max-width: 768px) { /* Mobile breakpoint specific overrides */
+    .header {
+        padding: 15px 20px;
+    }
+
+    /* Header Mobile Controls on Smallest Screens */
+    .header-mobile-controls {
+        gap: 10px;
+    }
+
+    .menu-toggle {
+        font-size: 2.2rem;
+    }
+
+    .theme-toggle-button-header {
+        display: none; /* Hide the header-level theme toggle on smallest screens, rely on the one inside the mobile nav */
+    }
+
+    .about-page-content {
+        margin: 40px auto 30px auto;
+        padding: 25px 20px;
+    }
+
+    .about-us-main-text h2, .integrantes-column h2 {
+        font-size: 2rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .about-us-main-text p {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .integrantes-column {
+        padding: 25px 15px;
+    }
+
+    .alunos-container {
+        padding: 15px 0;
+        gap: 1.2rem;
+        justify-content: flex-start;
+        scroll-snap-align: start;
+    }
+
+    .aluno-card {
+        width: 140px;
+        min-width: 120px;
+        padding: 1.2rem;
+    }
+
+    .aluno-name {
+        font-size: 0.95rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .instagram-link {
+        width: 44px;
+        height: 44px;
+    }
+
+    .instagram-link svg {
+        width: 26px;
+        height: 26px;
+    }
+
+    /* --- HIDE IMAGES ON MOBILE --- */
+    .aluno-card img {
+        display: none; /* Hide student profile images on mobile */
+    }
+    /* --- END HIDE IMAGES ON MOBILE --- */
+}
+
+/* Minimal Scrollbar for WebKit browsers */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* Minimal Scrollbar for Firefox */
+html {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+}
+
+/* Footer */
+footer {
+    margin-top: auto;
+    background-color: var(--color-black);
+    color: #f0f0f0;
+    padding: 20px 30px;
+    font-size: 0.85rem;
+    text-align: center;
+    box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.1);
+    border-top: 3px solid var(--color-primary-green);
+    transition: background-color var(--transition-speed), color var(--transition-speed), box-shadow var(--transition-speed), border-color var(--transition-speed);
+}
