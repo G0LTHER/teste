@@ -59,7 +59,7 @@ body {
 }
 
 /* ======================================================= */
-/* PARTE 2: CABEÇALHO E NAVEGAÇÃO (ESTRUTURA CORRETA)      */
+/* PARTE 2: CABEÇALHO E NAVEGAÇÃO (ESTRUTURA PADRÃO)      */
 /* ======================================================= */
 
 .header {
@@ -157,276 +157,140 @@ body.dark-theme .theme-toggle-button-in-nav {
     color: var(--color-text-dark);
 }
 
-
 /* ============================================================= */
-/* PARTE 3: CONTEÚDO ESPECÍFICO DA PÁGINA PRINCIPAL            */
+/* PARTE 3: CONTEÚDO ESPECÍFICO DA PÁGINA "SOBRE NÓS"         */
 /* ============================================================= */
 
-.hero {
-    position: relative;
+.about-page-content {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 120px 60px;
-    flex-wrap: wrap;
-    background: linear-gradient(135deg, var(--color-background-light), var(--color-light-green));
-    border-bottom: 1px solid var(--color-accent-green);
+    flex-direction: column;
+    max-width: 1200px;
+    margin: 80px auto 60px auto;
+    padding: 40px 60px;
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-light);
+    transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
 }
 
-.hero-text {
-    flex: 1 1 500px;
-    max-width: 600px;
-    margin-right: 40px;
+.about-us-main-text {
+    margin-bottom: 60px;
 }
 
-.hero-text h1 {
-    font-size: 4.2rem;
-    margin-bottom: 28px;
-    line-height: 1.15;
-    color: var(--color-black);
-    font-weight: 800;
+.about-us-main-text h2,
+.integrantes-column h2 {
+    color: var(--color-dark-green);
+    font-size: 2.8rem;
+    margin-bottom: 2rem;
+    font-weight: 700;
+    text-align: center;
+    position: relative;
+    padding-bottom: 15px;
 }
 
-.hero-text h1 span {
-    color: var(--color-primary-green);
+.about-us-main-text h2::after,
+.integrantes-column h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 90px;
+    height: 4px;
+    background-color: var(--color-primary-green);
+    border-radius: 2px;
 }
 
-.hero-text p {
-    font-size: 1.2rem;
-    margin-bottom: 45px;
+.about-us-main-text p {
+    font-size: 1.15rem;
+    margin-bottom: 1.8rem;
+    text-align: justify;
+    line-height: 1.8;
     color: var(--color-text-medium);
-    max-width: 600px;
-    line-height: 1.7;
 }
 
-.cta-button {
+.integrantes-column {
+    background: linear-gradient(135deg, var(--color-background-light), var(--color-light-green));
+    padding: 40px 30px;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-medium);
+}
+
+.alunos-container {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os cards quebrem a linha */
+    justify-content: center;
+    gap: 2rem;
+    padding: 20px 0;
+}
+
+.aluno-card {
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-medium);
+    padding: 2rem;
+    text-align: center;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    transition: var(--transition-speed);
+}
+
+.aluno-card img {
+    max-width: 100px;
+    height: 100px;
+    object-fit: cover; /* Garante que a imagem preencha o círculo */
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow-light);
+}
+
+.aluno-name {
+    font-weight: 600;
+    color: var(--color-dark-green);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.instagram-link {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
+    justify-content: center;
+    margin-top: 1rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
     background-color: var(--color-primary-green);
-    color: var(--color-white) !important;
-    padding: 16px 40px;
-    border-radius: var(--border-radius-lg);
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 1.15rem;
     transition: var(--transition-speed);
-    box-shadow: var(--shadow-medium);
 }
 
-.cta-button:hover {
-    background-color: var(--color-dark-green);
-    transform: translateY(-6px);
+.instagram-link svg {
+    width: 30px;
+    height: 30px;
+    fill: var(--color-white);
+}
+
+.aluno-card:hover {
+    transform: translateY(-10px);
     box-shadow: var(--shadow-strong);
 }
 
-.hero-image {
-    flex: 1 1 400px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
-
-.hero-image img {
-    max-width: 100%;
-    height: auto;
-    border-radius: var(--border-radius-md);
-}
-
-.scroll-down-indicator {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 2.2rem;
-    color: var(--color-primary-green);
-    opacity: 0.8;
-    animation: bounce 1.8s infinite;
-    cursor: pointer;
-    z-index: 10;
-}
-
-@keyframes bounce {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(10px); }
-}
-
-.consciencia {
-    padding: 100px 60px;
-    background-color: var(--color-white);
-}
-
-.consciencia-container {
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.consciencia-texto h2 {
-    font-size: 2.8rem;
-    margin-bottom: 1.8rem;
-    color: var(--color-dark-green);
-    text-align: center;
-}
-
-.consciencia-texto p {
-    font-size: 1.15rem;
-    line-height: 1.8;
-    text-align: justify;
-}
-
-.resultados {
-    background-color: var(--color-primary-green);
-    color: var(--color-white);
-    padding: 100px 60px;
-    text-align: center;
-}
-
-.resultados h2 {
-    font-size: 3.2rem;
-    margin-bottom: 4.5rem;
-    font-weight: 800;
-}
-
-.cards {
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
-    flex-wrap: wrap;
-}
-
-.card {
-    background-color: var(--color-white);
-    border-radius: var(--border-radius-md);
-    padding: 2.5rem;
-    width: 220px;
-    box-shadow: var(--shadow-medium);
-    transition: var(--transition-speed);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.card img {
-    width: 110px;
-    height: auto;
-    margin-bottom: 1.5rem;
-}
-
-.card p {
-    color: var(--color-text-dark);
-    font-size: 1.05rem;
-    font-weight: 600;
-}
-
-.card:hover {
-    transform: translateY(-15px) scale(1.04);
-    box-shadow: var(--shadow-strong);
-}
-
-.collection-points-section {
-    padding: 100px 60px;
-}
-
-.top-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 70px;
-    flex-wrap: wrap;
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.text-area h1 {
-    font-size: 4.5rem;
-    color: var(--color-dark-green);
-}
-
-.text-area .subtitle {
-    font-size: 1.05rem;
-    color: var(--color-primary-green);
-    margin-bottom: 2.5rem;
-    text-transform: uppercase;
-}
-
-.text-area h2 {
-    font-size: 2.5rem;
-    color: var(--color-black);
-}
-
-.pile-area {
-    flex: 1 1 500px;
-    display: flex;
-    justify-content: center;
-}
-
-.pile-image {
-    max-width: 100%;
-    height: auto;
-}
-
-.bottom-content {
-    display: flex;
-    flex-direction: column;
-    gap: 4.5rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.location-card {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 3.5rem;
-    justify-content: space-between;
-    padding: 4rem;
-    background-color: var(--color-white);
-    border-radius: var(--border-radius-md);
-    box-shadow: var(--shadow-medium);
-    border-left: 12px solid var(--color-primary-green);
-}
-
-.location-card:hover {
-    box-shadow: var(--shadow-strong);
-    transform: translateY(-8px);
-}
-
-.location-card h3 {
-    font-size: 2.2rem;
-    color: var(--color-dark-green);
-}
-
-.location-card p {
-    font-size: 1.1rem;
-    color: var(--color-text-medium);
-    line-height: 1.8;
-}
-
-.location-card .fonte {
-    font-size: 0.98rem;
-    font-style: italic;
-}
-
-.location-card .fonte a {
-    color: var(--color-dark-green);
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.map-area {
-    flex: 1 1 450px;
-}
-
-.map-area iframe {
-    width: 100%;
-    height: 380px;
-    border: 5px solid var(--color-primary-green);
-    border-radius: var(--border-radius-md);
-}
+/* Dark Theme para a página Sobre Nós */
+body.dark-theme .about-page-content { background-color: var(--color-white); }
+body.dark-theme .about-us-main-text h2,
+body.dark-theme .integrantes-column h2 { color: var(--color-primary-green); }
+body.dark-theme .about-us-main-text p { color: var(--color-text-medium); }
+body.dark-theme .integrantes-column { background: linear-gradient(135deg, #2C2C2C, #3A4750); }
+body.dark-theme .aluno-card { background-color: var(--color-white); }
+body.dark-theme .aluno-name { color: var(--color-text-dark); }
+body.dark-theme .instagram-link { background-color: var(--color-dark-green); }
+body.dark-theme .instagram-link:hover { background-color: var(--color-primary-green); }
 
 /* ======================================================= */
-/* PARTE 4: RESPONSIVIDADE E RODAPÉ (ESTRUTURA CORRETA)   */
+/* PARTE 4: RESPONSIVIDADE E RODAPÉ (ESTRUTURA PADRÃO)   */
 /* ======================================================= */
 
 @media (max-width: 992px) {
@@ -492,16 +356,22 @@ body.dark-theme .theme-toggle-button-in-nav {
         z-index: 999;
     }
 
-    .hero { padding: 80px 30px; text-align: center; }
-    .hero-text { margin-right: 0; }
-    .hero-image, .scroll-down-indicator, .pile-area { display: none; }
-    .consciencia, .resultados, .collection-points-section { padding: 80px 30px; }
-    .location-card { flex-direction: column; padding: 2rem; }
+    /* Ajustes da página Sobre Nós para mobile */
+    .about-page-content {
+        margin: 60px 20px;
+        padding: 30px;
+    }
 }
 
 @media (max-width: 768px) {
-    .hero-text h1 { font-size: 2.8rem; }
-    .cta-button { width: 100%; justify-content: center; }
+    .about-us-main-text h2,
+    .integrantes-column h2 {
+        font-size: 2rem;
+    }
+
+    .about-us-main-text p {
+        font-size: 1rem;
+    }
 }
 
 footer {
